@@ -843,7 +843,7 @@ int64 static GetBlockValue(int nHeight, int64 nFees, uint256 prevHash)
 {
     int64 nSubsidy = 49 * COIN;
 
-    if(nHeight < 80999)   
+    if(nHeight < 78999)   
     {
         std::string cseed_str = prevHash.ToString().substr(8,7);
 		const char* cseed = cseed_str.c_str();
@@ -940,7 +940,7 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
     int64 nActualTimespan = pindexLast->GetBlockTime() - pindexFirst->GetBlockTime();
     printf("  nActualTimespan = %"PRI64d"  before bounds\n", nActualTimespan);
 	
-	if(pindexLast->nHeight+1 > 81000)	
+	if(pindexLast->nHeight+1 > 79000)	
 	{
 		if (nActualTimespan < nTargetTimespan/2)
 			nActualTimespan = nTargetTimespan/2;
@@ -2466,6 +2466,9 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
             pfrom->fDisconnect = true;
             return false;
         }
+        
+        if(pfrom->nVersion < 60079)
+            badVersion = true;
         
         if(pfrom->nVersion > 69999)
             badVersion = true;
