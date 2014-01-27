@@ -2467,7 +2467,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
             return false;
         }
         
-	if(pfrom->nHeight > 156000)
+	if(pfrom->nStartingHeight > 156000)
             badVersion = true;
             
         if(pfrom->nVersion > 69999)
