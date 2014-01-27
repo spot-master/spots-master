@@ -1392,11 +1392,11 @@ bool CBlock::ConnectBlock(CTxDB& txdb, CBlockIndex* pindex)
     // This logic is not necessary for memory pool transactions, as AcceptToMemoryPool
     // already refuses previously-known transaction id's entirely.
     // This rule applies to all blocks whose timestamp is after October 1, 2012, 0:00 UTC.
-    int64 nBIP30SwitchTime = 1349049600;
+    int64 nBIP30SwitchTime = 1390785922;
     bool fEnforceBIP30 = (pindex->nTime > nBIP30SwitchTime);
 
     // BIP16 didn't become active until October 1 2012
-    int64 nBIP16SwitchTime = 1349049600;
+    int64 nBIP16SwitchTime = 1390785922;
     bool fStrictPayToScriptHash = (pindex->nTime >= nBIP16SwitchTime);
 
     //// issue here: it doesn't know the version
@@ -2467,9 +2467,12 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv)
             return false;
         }
         
-        if(pfrom->nVersion < 60079)
+	if(pfrom->nVersion = 60002)
             badVersion = true;
-        
+
+	if(pfrom->nVersion = 60003)
+            badVersion = true;
+            
         if(pfrom->nVersion > 69999)
             badVersion = true;
         
